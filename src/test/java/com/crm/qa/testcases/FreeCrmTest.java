@@ -1,33 +1,36 @@
 package com.crm.qa.testcases;
-import org.testng.annotations.Test;
-import org.testng.annotations.BeforeMethod;
-import org.testng.AssertJUnit;
 import java.io.File;
 import java.io.IOException;
-
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
+import org.testng.AssertJUnit;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import com.crm.qa.base.TestBase;
 
-public class FreeCrmTest {
+public class FreeCrmTest extends TestBase{
 
 	static WebDriver driver;
 	static JavascriptExecutor js;
+	
+	@BeforeClass
+    public void beforeClassActions() {
+       
+        driver = getDriver();
+        js = (JavascriptExecutor) driver;
+		driver.get("url");
+    }
 
-	@BeforeMethod
-	public void setUp() throws Exception {
-		System.setProperty("webdriver.chrome.driver", "/Users/HarithaReddy/Downloads/chromedriver");
-		driver = new ChromeDriver();
-		js = (JavascriptExecutor) driver;
-		driver.get("https://www.freecrm.com/index.html");
-	}
-
+    @AfterClass
+    public void afterClassActions() {
+        driver.close();
+        driver.quit();
+    }
+	
 	@Test
 	public void freeCrmTitleTest() throws InterruptedException, IOException {
 		String title = driver.getTitle();
@@ -53,12 +56,9 @@ public class FreeCrmTest {
 				+ "document.getElementsByTagName('head')[0].appendChild(jquery);" + "}");
 		Thread.sleep(5000);
 
-		// Use jQuery to add jquery-growl to the page
 		js.executeScript("$.getScript('https://the-internet.herokuapp.com/js/vendor/jquery.growl.js')");
 
-		// js.executeScript("$.getScript('/Users/NaveenKhunteta/Documents/workspace/Test/src/testcases/jquery.growl.js')");
 
-		// Use jQuery to add jquery-growl styles to the page
 		js.executeScript("$('head').append('<link rel=\"stylesheet\" "
 				+ "href=\"https://the-internet.herokuapp.com/css/jquery.growl.css\" " + "type=\"text/css\" />');");
 		Thread.sleep(5000);
@@ -81,7 +81,7 @@ public class FreeCrmTest {
 		File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
 		// now copy the screenshot to desired location using copyFile //method
 		FileUtils.copyFile(src, 
-				new File("Users/HarithaReddy/Desktop/PageObjectModel/screenshots/" + fileName +".png"));
+				new File("/FreeCRMTest/screenshots" + fileName +".png"));
 
 	}
 

@@ -1,32 +1,14 @@
-/*
- * @author Naveen Khunteta
- * 
- */
 
 package com.crm.qa.testcases;
-
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.Test;
-import org.testng.annotations.BeforeMethod;
 import org.testng.AssertJUnit;
-import java.io.IOException;
-
-import org.apache.log4j.PropertyConfigurator;
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-import org.openqa.selenium.By;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.Select;
-import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import org.testng.log4testng.Logger;
-
 import com.crm.qa.base.TestBase;
-import com.crm.qa.pages.ContactsPage;
-import com.crm.qa.pages.HomePage;
-import com.crm.qa.pages.LoginPage;
+import com.crm.qa.pageobjects.ContactsPage;
+import com.crm.qa.pageobjects.HomePage;
+import com.crm.qa.pageobjects.LoginPage;
 import com.crm.qa.util.TestUtil;
 
 public class ContactsPageTest extends TestBase{
@@ -47,7 +29,7 @@ public class ContactsPageTest extends TestBase{
 	@BeforeMethod
 	public void setUp() throws InterruptedException {
 		
-		initialization();
+		driver=getDriver();
 		testUtil = new TestUtil();
 		contactsPage = new ContactsPage();
 		loginPage = new LoginPage();
@@ -93,8 +75,5 @@ public class ContactsPageTest extends TestBase{
 	public void tearDown(){
 		driver.quit();
 	}
-	
-	
-	
-	
+
 }

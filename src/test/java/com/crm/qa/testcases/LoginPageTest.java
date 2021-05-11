@@ -1,15 +1,11 @@
 package com.crm.qa.testcases;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.Test;
-import org.testng.annotations.BeforeMethod;
 import org.testng.AssertJUnit;
-import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import com.crm.qa.base.TestBase;
-import com.crm.qa.pages.HomePage;
-import com.crm.qa.pages.LoginPage;
+import com.crm.qa.pageobjects.HomePage;
+import com.crm.qa.pageobjects.LoginPage;
 
 public class LoginPageTest extends TestBase{
 	LoginPage loginPage;
@@ -21,7 +17,7 @@ public class LoginPageTest extends TestBase{
 	
 	@BeforeMethod
 	public void setUp(){
-		initialization();
+		driver=getDriver();
 		loginPage = new LoginPage();	
 	}
 	
